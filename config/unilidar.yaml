@@ -1,0 +1,48 @@
+/**:
+    ros__parameters:
+        feature_extract_enable: false
+        point_filter_num: 3
+        max_iteration: 3
+        filter_size_surf: 0.5
+        filter_size_map: 0.5
+        cube_side_length: 1000.0
+        runtime_pos_log_enable: false
+        map_file_path: "/home/metafarmers/chae_ws/src/FAST_LIO_ROS2/PCD/map.pcd"
+        
+        common:
+            lid_topic: "/unilidar/cloud"
+            imu_topic: "/unilidar/imu"
+            time_sync_en: false
+            time_offset_lidar_to_imu: 0.0
+
+        preprocess:
+            lidar_type: 2               # 4 = 일반 PointCloud2 (L2는 Livox custom msg 아님)
+            scan_line: 18                # Point-LIO L2 config에서 18로 쓰고 있음
+            blind: 0.5
+            timestamp_unit: 2            # Point-LIO L2: 0 = second 단위
+            scan_rate: 10
+
+        mapping:
+            acc_cov: 0.1
+            gyr_cov: 0.1
+            b_acc_cov: 0.0001
+            b_gyr_cov: 0.0001            # 0.0001 → 0.001로 올림 (gyro bias 추정 더 적극적으로)
+            fov_degree: 360.0            # L2 실제 FOV에 맞춤 (Point-LIO 참고)
+            det_range: 30.0              # L2 스펙 최대 30m
+            extrinsic_est_en: false      # Point-LIO에서도 false — L2 일체형이라 고정값 사용
+            extrinsic_T: [0.007698, 0.014655, -0.00667]  # Point-LIO L2 값 그대로
+            extrinsic_R: [1.0, 0.0, 0.0,
+                          0.0, 1.0, 0.0,
+                          0.0, 0.0, 1.0]
+
+        publish:
+            path_en: true
+            effect_map_en: false
+            map_en: true
+            scan_publish_en: true
+            dense_publish_en: false
+            scan_bodyframe_pub_en: true
+
+        pcd_save:
+            pcd_save_en: true
+            interval: -1
